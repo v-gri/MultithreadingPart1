@@ -22,11 +22,8 @@ func executeTasks() {
         executeTask(2, delay: 3)
     }
     
-    DispatchQueue.global().async {
-        group.wait()
-        queueFinal.async {
-            executeTask(3, delay: 1)
-        }
+    group.notify(queue: queueFinal) {
+        executeTask(3, delay: 1)
     }
 }
 
